@@ -1,8 +1,8 @@
-//¼Ò½º ÄÚµå2.5: Polynomial Å¬·¡½º
+//ì†ŒìŠ¤ ì½”ë“œ2.5: Polynomial í´ë˜ìŠ¤
 /*
-* +, -, *, << , >> operator¸¦ »ç¿ëÇÑ ¹öÁ¯À¸·Î ±¸ÇöÇÑ´Ù.
-* template ¹öÁ¯À¸·Î ±¸Çö: T coef;
-* sub¿Í Mult(), Eval()¸¦ ±¸ÇöÇÑ´Ù
+* +, -, *, << , >> operatorë¥¼ ì‚¬ìš©í•œ ë²„ì ¼ìœ¼ë¡œ êµ¬í˜„í•œë‹¤.
+* template ë²„ì ¼ìœ¼ë¡œ êµ¬í˜„: T coef;
+* subì™€ Mult(), Eval()ë¥¼ êµ¬í˜„í•œë‹¤
 */
 
 #include <vector>
@@ -59,19 +59,19 @@ private:
 
 int Polynomial::GetData() {
 	int degree;
-	cout << "´ÙÇ×½ÄÀÇ degree ÀÔ·Â : ";
+	cout << "ë‹¤í•­ì‹ì˜ degree ì…ë ¥ : ";
 	cin >> degree;
 
 	capacity = degree + 1;
 
-	// °´Ã¼ ¸â¹ö ÃÊ±âÈ­
+	// ê°ì²´ ë©¤ë²„ ì´ˆê¸°í™”
 	start = free;
 
 	int currentExp = degree;
 
 	while (currentExp > 0 && free < capacity) {
-		int exp = (rand() % currentExp) + 1; // ÇöÀç Áö¼öº¸´Ù ³·Àº ¼öµé
-		int coef = (rand() % 9) + 1; // 1~9±îÁö ¼ö
+		int exp = (rand() % currentExp) + 1; // í˜„ì¬ ì§€ìˆ˜ë³´ë‹¤ ë‚®ì€ ìˆ˜ë“¤
+		int coef = (rand() % 9) + 1; // 1~9ê¹Œì§€ ìˆ˜
 
 		termArray[free].coef = coef;
 		termArray[free].exp = exp;
@@ -89,7 +89,7 @@ int Polynomial::GetData() {
 }
 
 ostream& operator<<(ostream& stream, Polynomial& p) {
-	bool first = true; //Ã¹ ¹øÂ° Ç×ÀÇ °æ¿ì + »ı·«ÇÔ
+	bool first = true; //ì²« ë²ˆì§¸ í•­ì˜ ê²½ìš° + ìƒëµí•¨
 	for (int i = p.start; i <= p.finish; ++i) {
 		int coef = p.termArray[i].getCoef();
 		int exp = p.termArray[i].getExp();
@@ -106,9 +106,9 @@ ostream& operator<<(ostream& stream, Polynomial& p) {
 	return stream;
 }
 
-int Polynomial::Display() {//coef°¡ 0ÀÌ ¾Æ´Ñ term ¸¸ ÀÖ´Ù°í °¡Á¤ÇÑ´Ù 
+int Polynomial::Display() {//coefê°€ 0ì´ ì•„ë‹Œ term ë§Œ ìˆë‹¤ê³  ê°€ì •í•œë‹¤ 
 	//cout << start << "|" << finish << "|" << free << "|" << terms << endl;
-	bool first = true; //Ã¹ ¹øÂ° Ç×ÀÇ °æ¿ì + »ı·«ÇÔ
+	bool first = true; //ì²« ë²ˆì§¸ í•­ì˜ ê²½ìš° + ìƒëµí•¨
 	for (int i = start; i <= finish; ++i) {
 		int coef = termArray[i].getCoef();
 		int exp = termArray[i].getExp();
@@ -231,24 +231,24 @@ Polynomial& Polynomial::operator*(Polynomial& b) {
 
 	result->start = free;
 
-	// thisÀÇ Ç×µé°ú bÀÇ Ç×µéÀ» °¢°¢ °öÇÔ
+	// thisì˜ í•­ë“¤ê³¼ bì˜ í•­ë“¤ì„ ê°ê° ê³±í•¨
 	for (int i = this->start; i <= this->finish; i++) {
 		for (int j = b.start; j <= b.finish; j++) {
 			double newCoef = termArray[i].coef * b.termArray[j].coef;
 			int newExp = termArray[i].exp + b.termArray[j].exp;
 
-			// ÀÌ¹Ì ÀÖ´Â °°Àº Áö¼öÀÇ Ç×À» Ã£À½
+			// ì´ë¯¸ ìˆëŠ” ê°™ì€ ì§€ìˆ˜ì˜ í•­ì„ ì°¾ìŒ
 			bool found = false;
 			for (int k = result->start; k < free; k++) {
 				if (result->termArray[k].exp == newExp) {
-					result->termArray[k].coef += newCoef; // °°Àº Áö¼ö¶ó¸é °è¼ö¸¦ ´õÇÔ
+					result->termArray[k].coef += newCoef; // ê°™ì€ ì§€ìˆ˜ë¼ë©´ ê³„ìˆ˜ë¥¼ ë”í•¨
 					found = true;
 					break;
 				}
 			}
 
 			if (!found) {
-				result->NewTerm(newCoef, newExp); // °°Àº Áö¼ö°¡ ¾øÀ¸¸é »õ·Î¿î Ç× Ãß°¡
+				result->NewTerm(newCoef, newExp); // ê°™ì€ ì§€ìˆ˜ê°€ ì—†ìœ¼ë©´ ìƒˆë¡œìš´ í•­ ì¶”ê°€
 			}
 		}
 	}
@@ -262,14 +262,14 @@ Polynomial& Polynomial::operator*(Polynomial& b) {
 double Polynomial::Eval(int x) {
 	double result = 0.0;
 
-	// ´ÙÇ×½ÄÀÇ °¢ Ç×À» ¼øÂ÷ÀûÀ¸·Î °è»ê
+	// ë‹¤í•­ì‹ì˜ ê° í•­ì„ ìˆœì°¨ì ìœ¼ë¡œ ê³„ì‚°
 	for (int i = start; i <= finish; i++) {
 		result += termArray[i].coef * pow(x, termArray[i].exp); // coef * x^exp
 	}
 
-	return result; // ÃÖÁ¾ °è»êµÈ °á°ú ¹İÈ¯
+	return result; // ìµœì¢… ê³„ì‚°ëœ ê²°ê³¼ ë°˜í™˜
 }
-// enum ¼±¾ğ
+// enum ì„ ì–¸
 enum MenuChoice { ADDITION = 1, SUBTRACTION, MULTIPLICATION, EVALUATION, EXIT };
 int Polynomial::capacity = 100;
 Term* Polynomial::termArray = new Term[100];
@@ -279,11 +279,11 @@ int main(void) {
 	srand(time(NULL));
 	int choice;
 	Polynomial P1, P2, P3;
-	cout << "ÀÔ·Â ¿¹Á¦: P(x)=5x^3+3x^1" << endl;
-	cout << "ÀÔ·Â ´ÙÇ×½Ä P1: " << endl;
+	cout << "ì…ë ¥ ì˜ˆì œ: P(x)=5x^3+3x^1" << endl;
+	cout << "ì…ë ¥ ë‹¤í•­ì‹ P1: " << endl;
 	P1.GetData();
 	P1.Display();
-	cout << "ÀÔ·Â ´ÙÇ×½Ä P2: " << endl;
+	cout << "ì…ë ¥ ë‹¤í•­ì‹ P2: " << endl;
 	P2.GetData();
 	P2.Display();
 	
@@ -293,7 +293,7 @@ int main(void) {
 		cout << "Enter your choice: ";
 		cin >> choice;
 		
-		// switch ¹®¿¡¼­ enum »ç¿ë
+		// switch ë¬¸ì—ì„œ enum ì‚¬ìš©
 		switch (static_cast<MenuChoice>(choice)) {
 		case ADDITION:
 			cout << "\n--------------- Addition ---------------\n";
@@ -302,7 +302,7 @@ int main(void) {
 			cout << "\nPolynomial2: ";
 			cout << P2;
 			P3 = P1 + P2;
-			cout << "\nµ¡¼À °á°ú: ";
+			cout << "\në§ì…ˆ ê²°ê³¼: ";
 			cout << P3;
 			cout << "\n----------------------------------------\n";
 			break;
