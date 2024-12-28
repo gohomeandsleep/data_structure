@@ -6,33 +6,33 @@ template <class E>
 class Collection {
 public:
     Collection(int capacity) {
-        data = new E[capacity];  // µ¿Àû ¹è¿­ ÇÒ´ç
-        top = 0;                 // topÀ» 0À¸·Î ÃÊ±âÈ­
+        data = new E[capacity];  // ë™ì  ë°°ì—´ í• ë‹¹
+        top = 0;                 // topì„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
     }
 
     virtual bool Add(E& e) {
-        data[top++] = e;         // °´Ã¼ Ãß°¡ ÈÄ top Áõ°¡
+        data[top++] = e;         // ê°ì²´ ì¶”ê°€ í›„ top ì¦ê°€
         return true;
     }
 
     virtual E& Search(string str) {
         for (int i = 0; i < top; i++) {
-            if (data[i].getEname() == str) {  // ÀÌ¸§À» ±âÁØÀ¸·Î °Ë»ö
+            if (data[i].getEname() == str) {  // ì´ë¦„ì„ ê¸°ì¤€ìœ¼ë¡œ ê²€ìƒ‰
                 return data[i];
             }
         }
-        throw runtime_error("ÇØ´ç ÀÌ¸§ÀÇ Á÷¿øÀÌ ¾ø½À´Ï´Ù.");
+        throw runtime_error("í•´ë‹¹ ì´ë¦„ì˜ ì§ì›ì´ ì—†ìŠµë‹ˆë‹¤.");
     }
 
     E& Delete(int index) {
         if (index < 0 || index >= top) {
-            throw out_of_range("Àß¸øµÈ ÀÎµ¦½ºÀÔ´Ï´Ù.");
+            throw out_of_range("ì˜ëª»ëœ ì¸ë±ìŠ¤ì…ë‹ˆë‹¤.");
         }
-        E& itemToDelete = data[index];  // »èÁ¦ÇÒ °´Ã¼¸¦ ÀúÀå
+        E& itemToDelete = data[index];  // ì‚­ì œí•  ê°ì²´ë¥¼ ì €ì¥
         for (int i = index; i < top - 1; i++) {
-            data[i] = data[i + 1];      // ¹è¿­À» ÇÑ Ä­¾¿ ´ç±è
+            data[i] = data[i + 1];      // ë°°ì—´ì„ í•œ ì¹¸ì”© ë‹¹ê¹€
         }
-        top--;                          // top °¨¼Ò
+        top--;                          // top ê°ì†Œ
         return itemToDelete;
     }
 
@@ -50,13 +50,13 @@ public:
         int i;
         for (i = this->top - 1; i >= 0; i--) {
             if (this->data[i].getEname() > e.getEname()) {
-                this->data[i + 1] = this->data[i];  // ¹è¿­À» ¿À¸¥ÂÊÀ¸·Î ÀÌµ¿
+                this->data[i + 1] = this->data[i];  // ë°°ì—´ì„ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì´ë™
             }
             else {
                 break;
             }
         }
-        this->data[i + 1] = e;  // ÀûÀıÇÑ À§Ä¡¿¡ Ãß°¡
+        this->data[i + 1] = e;  // ì ì ˆí•œ ìœ„ì¹˜ì— ì¶”ê°€
         this->top++;
         return true;
     }
@@ -67,7 +67,7 @@ public:
                 return this->data[i];
             }
         }
-        throw runtime_error("ÇØ´ç ÀÌ¸§ÀÇ Á÷¿øÀÌ ¾ø½À´Ï´Ù.");
+        throw runtime_error("í•´ë‹¹ ì´ë¦„ì˜ ì§ì›ì´ ì—†ìŠµë‹ˆë‹¤.");
     }
 };
 
@@ -86,7 +86,7 @@ public:
 };
 
 int main() {
-    // Employee °´Ã¼¸¦ ´ã´Â Collection ÃÊ±âÈ­
+    // Employee ê°ì²´ë¥¼ ë‹´ëŠ” Collection ì´ˆê¸°í™”
     Collection<Employee>* collectSet = new Collection<Employee>(5);
     Employee e1("E001", "John", 30);
     Employee e2("E002", "Jane", 25);
@@ -100,7 +100,7 @@ int main() {
     collectSet->Add(e4);
     collectSet->Add(e5);
 
-    // OrderedCollection °´Ã¼ ÃÊ±âÈ­
+    // OrderedCollection ê°ì²´ ì´ˆê¸°í™”
     OrderedCollection<Employee>* listSet = new OrderedCollection<Employee>(5);
     listSet->Add(e1);
     listSet->Add(e2);
@@ -108,10 +108,10 @@ int main() {
     listSet->Add(e4);
     listSet->Add(e5);
 
-    // Search ¿¹½Ã
+    // Search ì˜ˆì‹œ
     try {
         Employee& foundEmployee = collectSet->Search("John");
-        cout << "Collection¿¡¼­ Ã£Àº Á÷¿ø: " << foundEmployee.getEname() << ", ³ªÀÌ: " << foundEmployee.getAge() << endl;
+        cout << "Collectionì—ì„œ ì°¾ì€ ì§ì›: " << foundEmployee.getEname() << ", ë‚˜ì´: " << foundEmployee.getAge() << endl;
     }
     catch (runtime_error& e) {
         cout << e.what() << endl;
@@ -119,7 +119,7 @@ int main() {
 
     try {
         Employee& foundOrderedEmployee = listSet->Search("Jane");
-        cout << "OrderedCollection¿¡¼­ Ã£Àº Á÷¿ø: " << foundOrderedEmployee.getEname() << ", ³ªÀÌ: " << foundOrderedEmployee.getAge() << endl;
+        cout << "OrderedCollectionì—ì„œ ì°¾ì€ ì§ì›: " << foundOrderedEmployee.getEname() << ", ë‚˜ì´: " << foundOrderedEmployee.getAge() << endl;
     }
     catch (runtime_error& e) {
         cout << e.what() << endl;
