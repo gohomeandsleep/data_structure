@@ -15,7 +15,7 @@ public:
 		Term = new int[rows * cols];
 	}
 	int GetData();
-	void MoveRandom();
+	void MoveRandom(int size);
 	int Display();
 
 private:
@@ -49,22 +49,22 @@ int Matrix::Display() {
 	return 0;
 }
 
-void Matrix::MoveRandom() {
+void Matrix::MoveRandom(int size) {
 	const int N = 8;
 	int go = 1;
-	//Ã³À½ À§Ä¡¸¦ Á¤ÇÔ
+	//ì²˜ìŒ ìœ„ì¹˜ë¥¼ ì •í•¨
 	int loc_x = rand() % rows;
 	int loc_y = rand() % cols;
 	Term[loc_x * cols + loc_y] += 1;
 
-	//¸ðµç ¿ä¼Ò¿¡ 0ÀÌ ¾Æ´Ñ ¼ö·Î Ã¤¿öÁö¸é Á¾·á
-	//dx,dy Å×Å©´ÐÀ» ±â¹ÝÀ¸·Î ¹ú·¹ÀÇ ÀÌµ¿À» ±¸Çö
+	//ëª¨ë“  ìš”ì†Œì— 0ì´ ì•„ë‹Œ ìˆ˜ë¡œ ì±„ì›Œì§€ë©´ ì¢…ë£Œ
+	//dx,dy í…Œí¬ë‹‰ì„ ê¸°ë°˜ìœ¼ë¡œ ë²Œë ˆì˜ ì´ë™ì„ êµ¬í˜„
 	while (!CheckNonZero()) {
-		int x = rand() % N; //³­¼ö »ý¼º 0~7 ->dº¯¼ö ÀúÀå
+		int x = rand() % N; //ë‚œìˆ˜ ìƒì„± 0~7 ->dë³€ìˆ˜ ì €ìž¥
 		
-		if (0 <= loc_x + moves[x].a && loc_x + moves[x].a < 3 &&
-			0 <= loc_y + moves[x].b && loc_y + moves[x].b < 3) { //Å×ÀÌºí ¾È¿¡ ¼ÓÇÏ´ÂÁö È®ÀÎ
-			//ÀÌµ¿ÇÒ Ä­À¸·Î ÀÌµ¿ÇÏ°í ±× Ä­¿¡ Term°ª 1Áõ°¡
+		if (0 <= loc_x + moves[x].a && loc_x + moves[x].a < size &&
+			0 <= loc_y + moves[x].b && loc_y + moves[x].b < size) { //í…Œì´ë¸” ì•ˆì— ì†í•˜ëŠ”ì§€ í™•ì¸
+			//ì´ë™í•  ì¹¸ìœ¼ë¡œ ì´ë™í•˜ê³  ê·¸ ì¹¸ì— Termê°’ 1ì¦ê°€
 			loc_x += moves[x].a;
 			loc_y += moves[x].b;
 			Term[loc_x * cols + loc_y] += 1;
@@ -79,12 +79,14 @@ void Matrix::MoveRandom() {
 int main()
 {
 	srand(time(NULL));
-	Matrix table(3, 3);
+	cout << "Matrix í¬ê¸° : ";
+	cin >> size;
+	Matrix table(size, size);
 
 	table.GetData();
 	cout << "Before" << endl;
 	table.Display();
-	table.MoveRandom();
+	table.MoveRandom(size);
 	cout << "After" << endl;
 	table.Display();
 
