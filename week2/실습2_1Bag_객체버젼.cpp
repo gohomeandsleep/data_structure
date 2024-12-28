@@ -22,7 +22,7 @@ public:
 	}
 };
 
-//Bag 클래스 정의의
+//Bag 클래스 정의
 template <class T>
 class Bag {
 private:
@@ -122,10 +122,10 @@ int main() {
 	Bag<Employee> b(5);
 	int n;
 	Employee emp[5] = { Employee("E001", "John", 30),
-						Employee("E002", "Hong", 32),
-						Employee("E003", "Jung", 22),
-						Employee("E004", "Seok", 99),
-						Employee("E005", "Wang", 123)
+			    Employee("E002", "Hong", 32),
+			    Employee("E003", "Jung", 22),
+			    Employee("E004", "Seok", 99),
+			    Employee("E005", "Wang", 123)
 	};
 	try {
 		b.Push(emp[0]);
