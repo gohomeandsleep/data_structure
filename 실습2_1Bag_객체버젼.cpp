@@ -3,6 +3,7 @@
 using namespace std;
 #define MaxSize 100
 
+//예외 처리
 class EmptyException : public std::exception {
 public:
 	EmptyException() {};
@@ -21,6 +22,7 @@ public:
 	}
 };
 
+//Bag 클래스 정의의
 template <class T>
 class Bag {
 private:
