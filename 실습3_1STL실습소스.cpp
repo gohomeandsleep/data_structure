@@ -1,4 +1,3 @@
-//3.1Àı STL
 #include <iostream>
 #include <list>
 #include <memory> // std::allocator
@@ -8,15 +7,15 @@ struct MyAllocator {
 
     MyAllocator() = default;
 
-    // ¸Ş¸ğ¸® ÇÒ´ç
+    // ë©”ëª¨ë¦¬ í• ë‹¹
     T* allocate(std::size_t n) {
         std::cout << "Allocating " << n << " elements" << std::endl;
-        //:: scope resolution operatorÀÌ°í Àü¿ª ¹üÀ§ ¿¬»êÀÚÀÌ´Ù 
+        //:: scope resolution operatorì´ê³  ì „ì—­ ë²”ìœ„ ì—°ì‚°ìì´ë‹¤ 
         return static_cast<T*>(::operator new(n * sizeof(T)));
-        //**static_cast<T*>**´Â Å¸ÀÔ º¯È¯ ¿¬»êÀÚ. ÇÒ´çµÈ ¸Ş¸ğ¸®´Â ÀÏ¹İÀûÀÎ void* Æ÷ÀÎÅÍ·Î ¹İÈ¯µÇ¹Ç·Î, ÀÌ¸¦ T* Å¸ÀÔÀ¸·Î º¯È¯
+        //**static_cast<T*>**ëŠ” íƒ€ì… ë³€í™˜ ì—°ì‚°ì. í• ë‹¹ëœ ë©”ëª¨ë¦¬ëŠ” ì¼ë°˜ì ì¸ void* í¬ì¸í„°ë¡œ ë°˜í™˜ë˜ë¯€ë¡œ, ì´ë¥¼ T* íƒ€ì…ìœ¼ë¡œ ë³€í™˜
     }
 
-    // ¸Ş¸ğ¸® ÇØÁ¦
+    // ë©”ëª¨ë¦¬ í•´ì œ
     void deallocate(T* p, std::size_t n) {
         std::cout << "Deallocating " << n << " elements" << std::endl;
         ::operator delete(p);
@@ -24,21 +23,21 @@ struct MyAllocator {
 };
 
 int main() {
-    // std::allocator<int>¸¦ »ç¿ëÇÏ´Â std::list
+    // std::allocator<int>ë¥¼ ì‚¬ìš©í•˜ëŠ” std::list
     
     std::list<int, std::allocator<int>> my_list;
 
-    // list¿¡ °ª Ãß°¡
+    // listì— ê°’ ì¶”ê°€
     my_list.push_back(10);
     my_list.push_back(20);
 
-    // ¸®½ºÆ® Ãâ·Â
+    // ë¦¬ìŠ¤íŠ¸ ì¶œë ¥
     for (const int& val : my_list) {
         std::cout << val << " ";
     }
     
     
-    // MyAllocator<int>¸¦ »ç¿ëÇÏ´Â list
+    // MyAllocator<int>ë¥¼ ì‚¬ìš©í•˜ëŠ” list
     //std::list<int, MyAllocator<int>> my_list;
 
     my_list.push_back(1);
