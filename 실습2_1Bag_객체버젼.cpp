@@ -1,4 +1,3 @@
-//¼Ò½º ÄÚµå2.1: Bag Å¬·¡½º - Employee ¹öÁ¯ ±¸ÇöÇÏ±â
 #include <iostream>
 #include <memory>
 using namespace std;
@@ -146,7 +145,7 @@ int main() {
 		}
 	}
 	catch (string s) {
-		cout << "¿¹¿Ü¹ß»ý" << s;
+		cout << "ì˜ˆì™¸ë°œìƒ" << s;
 	}
 	return 0;
 }
