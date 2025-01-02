@@ -12,7 +12,7 @@ using namespace std;
 class EmptyStackException : public std::exception {
 public:
     const char* what() const noexcept override {
-        return " ºó Stack.";
+        return " ë¹ˆ Stack.";
     }
 };
 
@@ -121,7 +121,7 @@ string NextToken(const string& e, int idx) {
 
     if (e[idx] == '-') {
         if (idx == 0 || !isalpha(e[idx - 1]) && e[idx - 1] != '(' && e[idx - 1] != ')') {
-            return "¤Ñ";
+            return "ã…¡";
         }
     }
 
@@ -147,7 +147,7 @@ int isp(const string& a) {
     if (a == "(") return 8;
     if (a == "+" || a == "-") return 3;
     if (a == "*" || a == "/" || a == "%") return 2;
-    if (a == "!" || a == "¤Ñ") return 1;
+    if (a == "!" || a == "ã…¡") return 1;
     if (a == "<" || a == ">" || a == "<=" || a == ">=") return 4;
     if (a == "==" || a == "!=") return 5;
     if (a == "&&") return 6;
@@ -158,7 +158,7 @@ int isp(const string& a) {
 int icp(const string& a) {
     if (a == "(") return 0;
     if (a == "+" || a == "-") return 3;
-    if (a == "!" || a == "¤Ñ") return 1;
+    if (a == "!" || a == "ã…¡") return 1;
     if (a == "*" || a == "/" || a == "%") return 2;
     if (a == "<" || a == ">" || a == "<=" || a == ">=") return 4;
     if (a == "==" || a == "!=") return 5;
@@ -180,7 +180,7 @@ Expr Postfix(const string& e) {
     string token;
     while (idx < e.size()){
         token = NextToken(e, idx);
-        if (token.length() == 2 && token != "¤Ñ") {
+        if (token.length() == 2 && token != "ã…¡") {
             idx += 2;
         }
         else idx++;
@@ -233,7 +233,7 @@ void Eval(const Expr& e) {
             int operand = stack.Pop();
             stack.Push(!operand);
         }
-        else if (token == "¤Ñ")
+        else if (token == "ã…¡")
         {
             int operand = -stack.Pop();
             stack.Push(operand);
@@ -323,15 +323,15 @@ void PrintExpr(const Expr& ex) {
 Expressions SelectExpression() {
     int choice;
     cout << "1:E1,2:E2,3:E3,4:E4,5:E5,6:E6,7:E7,8:E8,9:E9,10:E10,11:E11,0:Exit\n";
-    cout << "¹øÈ£: ";
+    cout << "ë²ˆí˜¸: ";
     cin >> choice;
     return static_cast<Expressions>(choice);
 }
 
 void toPostfix(const string& infixString) {
-    cout << endl << "infix Ç¥±âÀÇ expression ÀÔ·Â: " << infixString;
+    cout << endl << "infix í‘œê¸°ì˜ expression ìž…ë ¥: " << infixString;
     Expr result = Postfix(infixString);
-    cout << "\nÈÄÀ§ Ç¥±â½Ä: ";
+    cout << "\ní›„ìœ„ í‘œê¸°ì‹: ";
     PrintExpr(result);
     Eval(result);
 }
@@ -406,10 +406,10 @@ int main() {
 
         }
         catch (const EmptyStackException& e) {
-            cout << "½ºÅÃ empty ¿¹¿Ü : " << e.what() << endl;
+            cout << "ìŠ¤íƒ empty ì˜ˆì™¸ : " << e.what() << endl;
         }
         catch (const OverflowStackException& e) {
-            cout << "½ºÅÃ overflow ¿¹¿Ü: " << e.what() << endl;
+            cout << "ìŠ¤íƒ overflow ì˜ˆì™¸: " << e.what() << endl;
         }
         catch (...) {
             cout << "An unknown exception occurred." << endl;
