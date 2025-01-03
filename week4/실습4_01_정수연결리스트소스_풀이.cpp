@@ -135,14 +135,14 @@ enum Enum {
 };
 
 void main() {
-	Enum menu; // ¸Þ´º
+	Enum menu;
 	int selectMenu;
 	int num = 0; bool result = false;
 	srand(time(NULL));
 	LinkedList la, lb, lc;
 	int data = 0;
 	do {
-		cout << "0 : ADD0 | 1 : Add1 | 2 : Delete | 3 : Show | 4 : Search | 5 : Merge | 6 : Exit \n¼±ÅÃ : ";
+		cout << "0 : ADD0 | 1 : Add1 | 2 : Delete | 3 : Show | 4 : Search | 5 : Merge | 6 : Exit \nì„ íƒ : ";
 		cin >> selectMenu;
 		switch (static_cast<Enum>(selectMenu)) {
 		case Add1:
@@ -154,10 +154,10 @@ void main() {
 			lb.Add(data);
 			break;
 		case Show:
-			cout << "¸®½ºÆ® la = ";
+			cout << "ë¦¬ìŠ¤íŠ¸ la = ";
 			la.Show();
 			cout << endl;
-			cout << "¸®½ºÆ® lb = ";
+			cout << "ë¦¬ìŠ¤íŠ¸ lb = ";
 			lb.Show();
 			cout << endl;
 			break;
@@ -166,21 +166,21 @@ void main() {
 			cin >> n;
 			result = la.Search(n) || lb.Search(n);
 			if (!result)
-				cout << "°Ë»ö °ª = " << n << " µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.\n";
+				cout << "ê²€ìƒ‰ ê°’ = " << n << " ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.\n";
 			else
-				cout << "°Ë»ö °ª = " << n << " µ¥ÀÌÅÍ°¡ Á¸ÀçÇÕ´Ï´Ù.\n";
+				cout << "ê²€ìƒ‰ ê°’ = " << n << " ë°ì´í„°ê°€ ì¡´ìž¬í•©ë‹ˆë‹¤.\n";
 			break;
 		case Delete:
-			cout << "List0¿¡¼­ »èÁ¦ÇÒ °ª : ";
+			cout << "List0ì—ì„œ ì‚­ì œí•  ê°’ : ";
 			cin >> data;
 			result = la.Delete(data);
-			if (result) cout << "»èÁ¦ ¿Ï·á\n";
+			if (result) cout << "ì‚­ì œ ì™„ë£Œ\n";
 			else cout << "Value isn't exist.\n";
 			break;
 
 		case Merge:
 			lc = la + lb;
-			cout << "¸®½ºÆ® lc = ";
+			cout << "ë¦¬ìŠ¤íŠ¸ lc = ";
 			lc.Show();
 			cout << endl;
 			break;
