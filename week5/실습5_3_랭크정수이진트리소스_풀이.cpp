@@ -52,7 +52,7 @@ public:
 	void rank() {
 		rank(root);
 	}
-	int search(int rank);//nth ÀÛÀº °ªÀ» Ã£´Â´Ù 
+	int search(int rank);//nth ì‘ì€ ê°’ì„ ì°¾ëŠ”ë‹¤ 
 	// Driver
 	int operator==(const Tree& t)
 	{
@@ -68,7 +68,7 @@ private:
 	int rank(TreeNode*);
 };
 int Tree::rank(TreeNode* current) {
-	return 0;
+	return current->leftSize;
 }
 TreeNode* Tree::inorderSucc(TreeNode* current)
 {
@@ -134,10 +134,10 @@ bool Tree::insert(int x) {
 	TreeNode* q = NULL;
 
 	while (p) {
-		if (*p == *newNode) { //°°Àº °ªÀº false
+		if (*p == *newNode) { //ê°™ì€ ê°’ì€ false
 			return false;
 		}
-		else if (*newNode < *p)		{ //¿ŞÂÊÀ¸·Î ÀÌµ¿ÇÏ°í p¿¡ rank + 1
+		else if (*newNode < *p)		{ //ì™¼ìª½ìœ¼ë¡œ ì´ë™í•˜ê³  pì— rank + 1
 			q = p;
 			p = p->LeftChild;
 		}
@@ -150,7 +150,7 @@ bool Tree::insert(int x) {
 	else if (*newNode < *q) q->LeftChild = newNode;
 	else q->RightChild = newNode;
 
-	//´Ù½Ã ¼øÈ¸ÇÏ¸é¼­ Á¶°Ç¿¡ µû¶ó rank +1
+	//ë‹¤ì‹œ ìˆœíšŒí•˜ë©´ì„œ ì¡°ê±´ì— ë”°ë¼ rank +1
 	TreeNode* rank = root;
 	while (rank) {
 		if (*rank == *newNode) break;
@@ -174,11 +174,11 @@ bool Tree::remove(int num) {
 		if (num < p->data) p = p->LeftChild;
 		else p = p->RightChild;
 	}
-	//Ã£´Â °ªÀÌ ¾øÀ» °æ¿ì
+	//ì°¾ëŠ” ê°’ì´ ì—†ì„ ê²½ìš°
 	if (!p) return false;
 	
 	int val = -1;
-	//³ëµå »èÁ¦ ÁøÇà
+	//ë…¸ë“œ ì‚­ì œ ì§„í–‰
 	if (p->LeftChild && p->RightChild) {
 		TreeNode* succ = inorderSucc(p);
 		val = succ->data;
@@ -196,13 +196,13 @@ bool Tree::remove(int num) {
 		delete p;
 	}
 
-	//´Ù½Ã ¼øÈ¸ÇÏ¸é¼­ Á¶°Ç¿¡ µû¶ó rank -1
+	//ë‹¤ì‹œ ìˆœíšŒí•˜ë©´ì„œ ì¡°ê±´ì— ë”°ë¼ rank -1
 	TreeNode* rank = root;
 	if (val != -1) num = val;
 	while (rank) {
 		if (rank->data == num) break;
 		else if (num < rank->data) {
-			cout << rank->data << "°¨¼Ò ¹ß»ı" << endl;
+			cout << rank->data << "ê°ì†Œ ë°œìƒ" << endl;
 			rank->leftSize -= 1;
 			rank = rank->LeftChild;
 		}
@@ -217,7 +217,7 @@ bool Tree::remove(int num) {
 
 int Tree::search(int rank) {
 	TreeNode* p = root;
-	if (!p) return -1; //Æ®¸®°¡ ºñ¾úÀ¸¸é -1
+	if (!p) return -1; //íŠ¸ë¦¬ê°€ ë¹„ì—ˆìœ¼ë©´ -1
 	while (p) {
 		if (rank == p->leftSize + 1) return p->data;
 		else if (rank <= p->leftSize) p = p->LeftChild;
@@ -257,8 +257,8 @@ int main() {
 		case Remove:
 			int x;
 			cin >> x;
-			if (t.remove(x)) cout << "»èÁ¦ ¿Ï·á" << endl;
-			else cout << "°ªÀÌ ¾øÀ½" << endl;
+			if (t.remove(x)) cout << "ì‚­ì œ ì™„ë£Œ" << endl;
+			else cout << "ê°’ì´ ì—†ìŒ" << endl;
 			cout << endl;
 			break;
 		case Inorder:
@@ -278,14 +278,14 @@ int main() {
 			break;
 		case Search:
 			t.rank();
-			cout << "Ã£°íÀÚ ÇÏ´Â rank ¼øÀ§ ÀÔ·Â: ";
+			cout << "ì°¾ê³ ì í•˜ëŠ” rank ìˆœìœ„ ì…ë ¥: ";
 			cin >> x;
-			rankNumber = t.search(x); // x¹øÂ° ¼øÀ§ÀÇ °ªÀ» Ã£´Â´Ù
-			if (rankNumber != -1)cout << x << " ¹øÂ° ¼øÀ§ °ªÀº " << rankNumber << endl;
-			else cout << "°ªÀÌ Á¸ÀçÇÏÁö ¾ÊÀ½" << endl;
+			rankNumber = t.search(x); // xë²ˆì§¸ ìˆœìœ„ì˜ ê°’ì„ ì°¾ëŠ”ë‹¤
+			if (rankNumber != -1)cout << x << " ë²ˆì§¸ ìˆœìœ„ ê°’ì€ " << rankNumber << endl;
+			else cout << "ê°’ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŒ" << endl;
 			break;
 		case Copy:
-			eq = (t == Tree(t));//copy constructor¸¦ È£Ãâ
+			eq = (t == Tree(t));//copy constructorë¥¼ í˜¸ì¶œ
 			if (eq) {
 				cout << "compare result: true" << endl;
 			}
