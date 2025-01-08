@@ -1,6 +1,3 @@
-/*
-* 1´Ü°è: 5Àå Á¤¼ö simple binary tree, recursive inorder, preorder, postorder, copy, equal ÇÔ¼ö¸¦ ±¸Çö
-*/
 #include <iostream>
 #define MaxCapacity 20
 using namespace std;
@@ -168,7 +165,7 @@ int main() {
 		case Remove:
 			int x;
 			cin >> x;
-			cout << t.remove(x);//ÀÔ·ÂµÈ x¿¡ ´ëÇÑ tree ³ëµå¸¦ Ã£¾Æ »èÁ¦ÇÑ´Ù.
+			cout << t.remove(x);//ìž…ë ¥ëœ xì— ëŒ€í•œ tree ë…¸ë“œë¥¼ ì°¾ì•„ ì‚­ì œí•œë‹¤.
 			cout << endl;
 			break;
 		case Inorder:
@@ -188,13 +185,13 @@ int main() {
 			break;
 		case Search:
 			cin >> x;
-			if (t.search(x))//ÀÔ·ÂµÈ x¿¡ ´ëÇÑ tree ³ëµå¸¦ Ã£¾Æ »èÁ¦ÇÑ´Ù.
-				cout << x << " °ªÀÌ Á¸ÀçÇÑ´Ù" << endl;
+			if (t.search(x))//ìž…ë ¥ëœ xì— ëŒ€í•œ tree ë…¸ë“œë¥¼ ì°¾ì•„ ì‚­ì œí•œë‹¤.
+				cout << x << " ê°’ì´ ì¡´ìž¬í•œë‹¤" << endl;
 			else
-				cout << "°ªÀÌ ¾ø´Ù" << endl;
+				cout << "ê°’ì´ ì—†ë‹¤" << endl;
 			break;
 		case Copy:
-			eq = (t == Tree(t));//copy constructor¸¦ È£Ãâ
+			eq = (t == Tree(t));//copy constructorë¥¼ í˜¸ì¶œ
 			if (eq) {
 				cout << "compare result: true" << endl;
 			}
