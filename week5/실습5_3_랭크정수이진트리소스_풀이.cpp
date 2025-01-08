@@ -32,7 +32,7 @@ public:
 	Tree() {
 		root = NULL;
 	}
-	Tree(const Tree& s)//copy constructor
+	Tree(const Tree& s)
 	{
 		root = copy(s.root);
 	}
